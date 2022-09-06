@@ -1,10 +1,13 @@
-import AppRouter, { AppRoutes, routes } from "router/index";
+import AppRouter, { AppRoutes, routes } from 'router/index';
+import { SWRConfigProvider } from './providers';
 
 function App() {
   return (
-    <AppRouter>
-      <AppRoutes routes={routes}></AppRoutes>
-    </AppRouter>
+    <SWRConfigProvider>
+      <AppRouter>
+        <AppRoutes routes={routes} />
+      </AppRouter>
+    </SWRConfigProvider>
   );
 }
 

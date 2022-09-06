@@ -1,0 +1,11 @@
+# Third party
+**/node_modules
+
+# Build products
+build/
+dist/
+dist-ssr/
+coverage/
+
+.prettierrc.js
+commitlint.config.js

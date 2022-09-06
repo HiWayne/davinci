@@ -1,12 +1,12 @@
-import { RouteType } from "./index";
-import Layout from "pages/Layout";
-import Home from "pages/Home";
+import { lazy } from 'react';
+import type { RouteType } from './index';
+
+const lazyHome = lazy(() => import('pages/Home'));
 
 const homeRoutes: RouteType[] = [
   {
-    path: "/",
-    element: Layout,
-    children: [{ index: true, element: Home }],
+    path: '/',
+    element: lazyHome,
   },
 ];
 

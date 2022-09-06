@@ -19,9 +19,10 @@
     "paths": {
       "@/*": ["src/*"],
       "pages/*": ["src/pages/*"],
-      "router/*": ["src/router/*"]
+      "router/*": ["src/router/*"],
+      "assets/*": ["src/assets/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "./vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
