@@ -2,7 +2,7 @@ import qs from 'qs';
 import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export const Login = () => {
+const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -14,5 +14,7 @@ export const Login = () => {
     const fromPath = path ? path + (query ? `?${query}` : '') : '/';
     navigate(fromPath, { replace: true });
   }, []);
-  return <div onClick={loginSuccess}>登录</div>;
+  return <div onClick={loginSuccess}>TODO: 登录</div>;
 };
+
+export default Login;

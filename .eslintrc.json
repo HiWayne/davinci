@@ -14,8 +14,14 @@
     "import/no-extraneous-dependencies": ["off"],
     "no-else-return": ["off"]
   },
-  "extends": ["airbnb", "airbnb-typescript", "prettier"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "prettier",
+    "plugin:jest/recommended"
+  ],
   "parserOptions": {
     "project": ["./tsconfig.json"]
-  }
+  },
+  "plugins": ["jest"]
 }

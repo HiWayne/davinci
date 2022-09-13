@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+import { isProduction } from '@/utils';
 
 interface UseAuthResponse {
   loading: boolean;
@@ -15,13 +16,37 @@ interface Response {
   data: UserData | undefined;
 }
 
-export const useAuth = (permissions?: string[]): UseAuthResponse => {
-  const response = useSWR<Response>({
+const hasPermissions = (
+  userPermissions: string[],
+  permissionsToBeVerified: string[],
+  loose: boolean,
+) =>
+  loose
+    ? permissionsToBeVerified.some((permission) =>
+        userPermissions.includes(permission),
+      )
+    : permissionsToBeVerified.every((permission) =>
+        userPermissions.includes(permission),
+      );
+
+export const useAuth = (
+  permissions?: string[],
+  loose: boolean = true,
+  __test__?: { error: boolean; data: Response | null },
+): UseAuthResponse => {
+  let response;
+  response = useSWR<Response>({
     method: 'get',
     url: '/napi/people/profile/',
   });
+  if (isProduction() && __test__) {
+    throw new Error('不能在生产环境使用测试用例');
+  }
+  if (!isProduction() && __test__) {
+    response = __test__;
+  }
   // 不需要权限
-  if (!permissions) {
+  if (!Array.isArray(permissions)) {
     return {
       loading: false,
       auth: true,
@@ -41,11 +66,11 @@ export const useAuth = (permissions?: string[]): UseAuthResponse => {
     const { status, data } = response.data;
     // 登录
     if (status === 1 && data) {
-      // 有权限
+      // 有权限。permissions是空数组代表只需要登录，不需要其他特殊权限
       if (
-        Array.isArray(permissions) &&
-        permissions.length > 0 &&
-        permissions.includes(response as any)
+        permissions.length === 0 ||
+        (permissions.length > 0 &&
+          hasPermissions(data.identity, permissions, loose))
       ) {
         return {
           loading: false,

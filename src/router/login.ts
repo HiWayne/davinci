@@ -1,13 +1,12 @@
 import { lazy } from 'react';
 import type { RouteType } from './index';
 
-const LazyEditor = lazy(() => import('pages/Editor'));
+const LazyLogin = lazy(() => import('pages/Login'));
 
 const editorRoutes: RouteType[] = [
   {
-    path: '/editor',
-    element: LazyEditor,
-    permissions: [],
+    path: '/login',
+    element: LazyLogin,
   },
 ];
 

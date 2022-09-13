@@ -9,3 +9,6 @@ coverage/
 
 .prettierrc.js
 commitlint.config.js
+babel.config.js
+jest.config.js
+staticAssetsStub.js

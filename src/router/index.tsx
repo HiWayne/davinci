@@ -4,10 +4,12 @@ import {
   Routes as BrowserRoutes,
   Route,
 } from 'react-router-dom';
-import homeRoutes from './home';
-import editorRoutes from './editor';
 import RouterGuard from './RouterGuard';
 import { Loading } from '@/components';
+// 路由
+import homeRoutes from './home';
+import editorRoutes from './editor';
+import loginRoutes from './login';
 
 export interface RouteType {
   path: string;
@@ -17,7 +19,11 @@ export interface RouteType {
   permissions?: string[];
 }
 
-export const routes: RouteType[] = [...homeRoutes, ...editorRoutes];
+export const routes: RouteType[] = [
+  ...homeRoutes,
+  ...editorRoutes,
+  ...loginRoutes,
+];
 
 const renderNestRoute = (_routes: RouteType[]) => {
   return _routes.map((route) => {
